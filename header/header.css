@@ -86,6 +86,14 @@ html,body{
 }
 .number-phone{
     color: var(--primary-color);
+    font-size: 14px;
+}
+.header-link:hover,
+.lang:hover {
+    color: var(--primary-color);
+}
+.logo-name:hover {
+    cursor: pointer;
 }
 
 @media (max-width: 850px) {
