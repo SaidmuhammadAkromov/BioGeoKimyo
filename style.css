@@ -1,2 +1,9 @@
 @import url(./header/header.css);
 @import url(./css-variables.css);
+@import url(./footer/footer.css);
+
+* {
+    list-style: none;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
