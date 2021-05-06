@@ -11,6 +11,7 @@ footer {
     align-items: center;
     height: 100%;
     width: 100%;
+    padding: 30px 0;
 }
 .footer-category,
 .footer-web-icons {
@@ -19,6 +20,7 @@ footer {
 .footer-category li,
 .footer-web-icons li {
     margin-left: 20px;
+    font-size: 14px;
 } 
 .footer-category li a,
 .footer-web-icons li a {
@@ -35,7 +37,7 @@ footer {
     }
     .footer-logo-name {
         margin-bottom: 30px;
-        font-size: 2.5rem;
+        font-size: 1rem;
     }
     .footer-category li:nth-child(2),
     .footer-web-icons li:nth-child(2) {
@@ -51,6 +53,6 @@ footer {
     }
     .footer-category li,
     .footer-web-icons li {
-        font-size: 2rem;
+        font-size: 1rem;
     }
 }

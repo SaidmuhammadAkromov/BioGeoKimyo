@@ -6,6 +6,5 @@ window.onload = function() {
         document.querySelector('#uzLang').innerText = 'Uzbek'
         document.querySelector('#ruLang').innerText = 'Russian'
         document.querySelector('#engLang').innerText = 'English'
-        document.querySelector('.header-menu').append(document.querySelector('.container'))
     })
 }
