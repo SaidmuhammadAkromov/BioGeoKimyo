@@ -92,3 +92,38 @@ article span {
 #geografiya-block {
     margin: 0 30px;
 }
+@media (max-width: 381px) {
+    .categories {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .category {
+        width: 80%;
+        margin-bottom: 60px 0;
+        padding: 24px 0;
+    }
+    .card-image-block,
+    .category-header {
+        height: 400px;
+    }
+    .card-content h4 {
+        font-size: 30px;
+    }
+    .card-content p {
+        font-size: 25px;
+    }
+    .card-content span {
+        font-size: 20px;
+    }
+    .more-articles-container h5 {
+        font-size: 30px;
+    }
+    article p {
+        font-size: 25px;
+    }
+    article span {
+        font-size: 20px;
+    }
+}

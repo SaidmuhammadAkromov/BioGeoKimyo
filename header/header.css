@@ -186,8 +186,8 @@ html,body{
         display: block;
     }
 }
-@media (max-width: 320px), (max-height:480px) {
-    .header-link,.lang, .number-phone{
+@media (max-width: 381px) {
+    /* .header-link,.lang, .number-phone{
         font-size: 1rem;
     }
     .logo-name{
@@ -195,5 +195,40 @@ html,body{
     }
     .header-list li, .settings li {
         margin-bottom: 1.2rem;
+    } */
+    .header-body {
+        width: 1160px;
+    }
+    .header-menu.active {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding-top: 150px;
+        height: auto;
+    }
+    .header-menu.active hr{
+        width: 1521px;
+    }
+    .header-list,
+    .settings {
+        width: 1160px;
+    }
+    .header-list li a,
+    .settings li a {
+        margin: 0;
+    }
+    .container {
+        display: flex;
+        justify-content: center;
+    }
+    .logo-name {
+        font-size: 30px;
+    }
+    .settings.active {
+        margin: 0;
+    }
+    .header-link, .lang, .number-phone {
+        font-size: 25px;
     }
 }

@@ -56,3 +56,14 @@ footer {
         font-size: 1rem;
     }
 }
+@media (max-width: 381px) {
+    .footer-body {
+        width: 1160px;
+    }
+    .footer-body h1 {
+        font-size: 30px;
+    }
+    .footer-web-icons li ,.footer-category li {
+        font-size: 25px;
+    }
+}
