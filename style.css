@@ -2,6 +2,7 @@
 @import url(./css-variables.css);
 @import url(./footer/footer.css);
 @import url(./main/main.css);
+
 * {
     list-style: none;
     text-decoration: none;
