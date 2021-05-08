@@ -2,7 +2,7 @@ footer {
     background-color: var(--secondary-color);
     position: relative;
     display: inline-block;
-    top: 100%;
+    bottom: -10%;
     width: 100%;
     left: 0;
     display: inline-block;
@@ -51,9 +51,9 @@ footer {
         margin-top: 30px;
     }
     .footer-category li a, .footer-web-icons li a {
-        font-size: 20px;
+        font-size: 15px;
     }
     h1 {
-        font-size: 30px;
+        font-size: 25px;
     }
 }
