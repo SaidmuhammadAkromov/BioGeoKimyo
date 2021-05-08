@@ -165,4 +165,7 @@ html,body{
     .header-list li, .settings li {
         margin-bottom: 20px;
     }
+    header {
+        width: 100%;
+    }
 }

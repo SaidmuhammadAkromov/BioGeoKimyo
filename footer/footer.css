@@ -1,8 +1,10 @@
 footer {
-    width: 100%;
     background-color: var(--secondary-color);
     position: relative;
-    bottom: -10%;
+    display: inline-block;
+    top: 100%;
+    width: 100%;
+    left: 0;
     display: inline-block;
 }
 .footer-body {
@@ -29,4 +31,29 @@ footer {
 .footer-category li :hover,
 .footer-web-icons li a:hover {
     color: var(--primary-color);
+}
+
+@media (max-width: 545px) {
+    body, html {
+        height: 100%;
+        width: 100%;
+    }
+    .footer-body {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .footer-category li, .footer-web-icons li {
+        margin: 0;
+        margin-right: 20px;
+    }
+    .footer-category {
+        margin-bottom: 30px;
+        margin-top: 30px;
+    }
+    .footer-category li a, .footer-web-icons li a {
+        font-size: 20px;
+    }
+    h1 {
+        font-size: 30px;
+    }
 }
