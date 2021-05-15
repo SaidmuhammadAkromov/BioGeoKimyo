@@ -52,16 +52,17 @@
 .card-content h4{
     margin-top: 20px;
     margin-bottom: 7px;
+    font-size: var(--font-size-card-titles);
 }
 .card-content {
     margin: 0 30px;
 }
 .card-content p {
     margin-bottom: 15px;
-    font-size: 14px;
+    font-size: var(--font-size-card-p);
 }
 .card-content span {
-    font-size: 11px;
+    font-size: var(--size-card-span);
     margin: 10px 0;
 }
 
@@ -75,7 +76,7 @@
     margin: 0 20px;
     padding: 10px;
 }
-.more-articles h5 {
+.more-articles h4 {
     margin-top: 20px;
     margin-bottom: 30px;
 }
@@ -85,7 +86,7 @@ article {
     padding-bottom: 30px;
 }
 article span {
-    font-size: 12px;
+    font-size: var(--size-card-span);
     position: absolute;
     bottom: 0px;
 }
@@ -108,23 +109,11 @@ article span {
     .category-header {
         height: 400px;
     }
-    .card-content h4 {
-        font-size: 25px;
-    }
-    .card-content p {
-        font-size: 15px;
-    }
-    .card-content span {
-        font-size: 15px;
-    }
-    .more-articles-container h5 {
-        font-size: 25px;
-    }
-    article p {
-        font-size: 15px;
-    }
-    article span {
-        font-size: 15px;
+
+    :root{
+        --font-size-titles: 25px;
+        --font-size-p :15px;
+        --size-span:15px;
     }
 }
 @media (max-width: 950px) {
@@ -171,7 +160,7 @@ article span {
         height: 25px;
         width: 5rem;
     }
-    .card-content p {
-        font-size: 12px;
+    :root{
+        --font-size-p: 12px;
     }
 }
