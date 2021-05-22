@@ -1,81 +1,121 @@
 const IMAGE_URL = "http://192.144.37.95/images/"
-const BASE_URL = 'http://192.144.37.95:8080/'
+const BASE_URL = 'http://192.144.37.95:8080/api'
 let SELECTED_JOURNAL_ID = null;
 let SELECTED_LANG_ID = null;
 
+
 function getFullDate(date) {
     const d = new Date(date)
-    console.log(d);
     return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
 }
 
-function editCards(card, importElements) {
-    card.firstElementChild.firstElementChild.src = IMAGE_URL + importElements.image
-    card.lastElementChild.firstElementChild.innerText = importElements.title
-    card.lastElementChild.children[1].innerHTML = importElements.body
-    card.lastElementChild.lastElementChild.innerText = getFullDate(importElements.date) 
-}
-function editCardsLang(card,importElements) {
-    card.firstElementChild.firstElementChild.src = IMAGE_URL + importElements[0].author.image
-    card.lastElementChild.firstElementChild.innerText = importElements[0].title
-    card.lastElementChild.children[1].innerHTML = importElements[0].body
+function createCard(block, importElement) {
+    const card = document.createElement('a')
+    card.classList.add('card')
+    block.append(card)
+
+
+    const cardImgBlock = document.createElement('div')
+    cardImgBlock.classList.add('card-image-block')
+    card.append(cardImgBlock)
+
+
+    const cardImage = document.createElement('img')
+    cardImage.style.width = '100%'
+    cardImage.style.height = '100%'
+    cardImage.src = IMAGE_URL + importElement.image
+    cardImgBlock.append(cardImage)
+
+
+    const cardCategoryButton = document.createElement('a')
+    cardCategoryButton.classList.add('card-category-button')
+    cardCategoryButton.innerText = "Category"
+    cardImgBlock.append(cardCategoryButton)
+
+
+    const cardContent = document.createElement('div')
+    cardContent.classList.add('card-content')
+    card.append(cardContent)
+
+
+    const cardTitle = document.createElement('h4')
+    cardTitle.innerText = importElement.title
+    cardContent.append(cardTitle)
+
+
+    const cardBody = document.createElement('div')
+    cardBody.classList.add('card-body')
+    cardBody.innerHTML = importElement.body
+    cardContent.append(cardBody)
+
+
+    const cardDate = document.createElement('span')
+    cardDate.innerText = getFullDate(importElement.date)
+    card.append(cardDate)
 }
 
-async function getMoreArticles(block) {
-    const url = BASE_URL + 'api/articles?langId=' + SELECTED_LANG_ID + '&journalId=' + SELECTED_JOURNAL_ID;
+function createMoreArticles(block, importElements) {
+    const moreArticlesBlock = document.createElement('div')
+    moreArticlesBlock.classList.add('more-articles')
+    block.append(moreArticlesBlock)
+    
+    const moreArticlesBlockContainer = document.createElement('div')
+    moreArticlesBlockContainer.classList.add('more-articles-container')
+    moreArticlesBlock.append(moreArticlesBlockContainer)
 
-    try {
-        const response = await fetch(url)
-        const importElements = await response.json()
-        block.children[0].children[1].children[0].innerHTML = importElements[0].title
-        block.children[0].children[3].children[0].innerHTML = importElements[1].title
-        block.children[0].children[5].children[0].innerHTML = importElements[2].title
-        block.children[0].children[1].children[1].innerHTML = getFullDate(importElements[0].date)
-        block.children[0].children[3].children[1].innerHTML = getFullDate(importElements[1].date)
-        block.children[0].children[5].children[1].innerHTML = getFullDate(importElements[2].date)
-        var d = new Date(importElements[0].date)
-        console.log(d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear());
-        console.log(importElements[0].date);
-        
-    } catch (error) {
-        console.log(error);
+    const moreArticlesTitle = document.createElement('h4')
+    moreArticlesTitle.innerText = 'Boshqa malumotlar'
+    moreArticlesBlockContainer.append(moreArticlesTitle)
+
+    for (let index = 0; index < 3; index++) {
+        const element = importElements[index];
+        const article = document.createElement('article')
+        moreArticlesBlockContainer.append(article)
+
+        const articleTittle = document.createElement('h4')
+        articleTittle.innerText = element.title
+        const articleDate = document.createElement('span')
+        articleDate.innerText = getFullDate(element.date)
+
+        article.append(articleDate)
+        article.append(articleTittle)
     }
 }
-
-async function getArticles(size=6, offset=6) {
-    const url = BASE_URL + 'api/articles?langId=' + SELECTED_LANG_ID;
+async function getArticles(block,langId, journalId , size=10, offset=0) {
+    const url = BASE_URL+ "/articles?langId=" + langId + "&journalId=" + journalId + "&size="+ size + "&offset=" + offset;
     
     // setLoading(true)
     try {
         const response = await fetch(url)
         const importElements = await response.json()
-        const biologCard0 = document.getElementById('biologCard0')
-        const geografiyaCard0 = document.getElementById('geografiyaCard0')
-        const kimyoCard0 = document.getElementById('kimyoCard0')
-
         console.log(importElements);
-        const elements = importElements
-        editCards(biologCard0, elements[0])
-        editCards(geografiyaCard0, elements[1])
-        editCards(kimyoCard0, elements[3])
-
+        for (let index = 0; index < importElements.length; index++) {
+            const element = importElements[index];
+            createCard(block, element)
+        }
     } catch (error) {
         console.log(error)
     } finally {
         // setLoading(false)
     }
 }
-window.onload = function () {
-    const biologCard0 = document.getElementById('biologCard0')
-    const geografiyaCard0 = document.getElementById('geografiyaCard0')
-    const kimyoCard0 = document.getElementById('kimyoCard0')
-    const ruLang = document.getElementById('ruLang')
-    const uzLang = document.getElementById('uzLang')
-    const engLang = document.getElementById('engLang')
-    const bioMoreArticle = document.getElementById('bioMoreArticle')
-    const geoMoreArticles = document.getElementById('geoMoreArticle')
-    const kimyoMoreAricles = document.getElementById('kimyoMoreArticles')
+async function getMoreArticles(block,langId, journalId , size=3, offset) {
+    const url = BASE_URL+ "/articles?langId=" + langId + "&journalId=" + journalId + "&size="+ size + "&offset=" + offset;
+    
+    // setLoading(true)
+    try {
+        const response = await fetch(url)
+        const importElements = await response.json()
+        console.log(importElements);
+        createMoreArticles(block, importElements)
+    } catch (error) {
+        console.log(error)
+    } finally {
+        // setLoading(false)
+    }
+}
 
+function toggleBurger() {
     document.querySelector('.header-burger').addEventListener('click', function() {
         console.log('hello');
         document.querySelector('.header-burger').classList.toggle('active')
@@ -85,67 +125,17 @@ window.onload = function () {
         document.querySelector('#ruLang').innerText = 'Russian'
         document.querySelector('#engLang').innerText = 'English'
     })
-
-    SELECTED_LANG_ID = 1
-    getArticles()
-    SELECTED_JOURNAL_ID = 1
-    getMoreArticles(bioMoreArticle)
-
-    SELECTED_JOURNAL_ID = 2
-    getMoreArticles(geoMoreArticles)
-
-    SELECTED_JOURNAL_ID = 3
-    getMoreArticles(kimyoMoreAricles)
-
-    ruLang.addEventListener('click', function () {
-        SELECTED_LANG_ID = 2
-        fetch(BASE_URL + 'api/articles?langId=2')
-        .then(response => {
-           return response.json()
-        })
-        .then(function (importElements) {
-            const elements = importElements
-            editCardsLang(biologCard0, importElements)
-            editCardsLang(geografiyaCard0, importElements)
-            editCardsLang(kimyoCard0, importElements)
-            console.log(elements);
-            ruLang.classList.add('active-class')
-            uzLang.classList.remove('active-class')
-            engLang.classList.remove('active-class')
-        });
-
-    })
-
-    engLang.addEventListener('click', function () {
-        // SELECTED_LANG_ID = 3
-        engLang.classList.add('active-class')
-        uzLang.classList.remove('active-class')            
-        ruLang.classList.remove('active-class')
-    })
-
-    uzLang.addEventListener('click', function () {
-        SELECTED_LANG_ID = 1
-        getArticles()
-        uzLang.classList.add('active-class')
-        ruLang.classList.remove('active-class')
-        engLang.classList.remove('active-class')
-    })
 }
 
-
-
-
-
-
-
- // fetch(BASE_URL + 'api/articles?langId=1')
-    //     .then(response => {
-    //        return response.json()
-    //     })
-    //     .then(function returnFetch(importElements) {
-    //         const elements = importElements
-    //         editCards(biologCard0, elements[0])
-    //         editCards(geografiyaCard0, elements[1])
-    //         editCards(kimyoCard0, elements[3])
-    //         console.log(elements);
-    //     });
+window.addEventListener('load', async function () {
+    const biologiyaBlock = document.getElementById('biologiya-block')
+    const geografiyaBlock = document.getElementById('geografiya-block')
+    const kimyoaBlock = document.getElementById('kimyo-block')
+    toggleBurger()
+    getArticles(biologiyaBlock, 1, 1, 1)
+    getArticles(geografiyaBlock, 1, 2, 1)
+    await getArticles(kimyoaBlock, 1, 3, 1)
+    getMoreArticles(biologiyaBlock, 1, 1, 3, 3)
+    getMoreArticles(geografiyaBlock, 1, 2, 3, 3)
+    getMoreArticles(kimyoaBlock, 1, 3, 3, 3)
+})
