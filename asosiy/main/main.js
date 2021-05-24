@@ -3,7 +3,6 @@ const BASE_URL = 'http://192.144.37.95:8080/api'
 let SELECTED_JOURNAL_ID = null;
 let SELECTED_LANG_ID = null;
 
-
 function getFullDate(date) {
     const d = new Date(date)
     return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
@@ -12,7 +11,13 @@ function getFullDate(date) {
 function createCard(block, importElement) {
     const card = document.createElement('a')
     card.classList.add('card')
+    card.id = importElement.id
+    card.addEventListener('click', function () {
+        console.log(this.id);
+    })
     block.append(card)
+
+    
 
 
     const cardImgBlock = document.createElement('div')
