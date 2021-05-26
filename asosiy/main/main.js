@@ -11,10 +11,10 @@ function getFullDate(date) {
 function createCard(block, importElement) {
     const card = document.createElement('a')
     card.classList.add('card')
-    card.id = importElement.id
-    card.addEventListener('click', function () {
-        console.log(this.id);
-    })
+    let cardId;
+    cardId = importElement.id
+    card.href = '../article/index.html?id=' + cardId 
+    
     block.append(card)
 
     
@@ -77,8 +77,9 @@ function createMoreArticles(block, importElements) {
         const article = document.createElement('article')
         moreArticlesBlockContainer.append(article)
 
-        const articleTittle = document.createElement('h4')
+        const articleTittle = document.createElement('a')
         articleTittle.innerText = element.title
+        articleTittle.href = '../article/index.html?id=' + element.id 
         const articleDate = document.createElement('span')
         articleDate.innerText = getFullDate(element.date)
 
