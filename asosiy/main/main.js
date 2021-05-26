@@ -3,7 +3,6 @@ const BASE_URL = 'http://192.144.37.95:8080/api'
 let SELECTED_JOURNAL_ID = null;
 let SELECTED_LANG_ID = null;
 
-
 function getFullDate(date) {
     const d = new Date(date)
     return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
@@ -12,7 +11,13 @@ function getFullDate(date) {
 function createCard(block, importElement) {
     const card = document.createElement('a')
     card.classList.add('card')
+    let cardId;
+    cardId = importElement.id
+    card.href = '../article/index.html?id=' + cardId 
+    
     block.append(card)
+
+    
 
 
     const cardImgBlock = document.createElement('div')
@@ -72,8 +77,9 @@ function createMoreArticles(block, importElements) {
         const article = document.createElement('article')
         moreArticlesBlockContainer.append(article)
 
-        const articleTittle = document.createElement('h4')
+        const articleTittle = document.createElement('a')
         articleTittle.innerText = element.title
+        articleTittle.href = '../article/index.html?id=' + element.id 
         const articleDate = document.createElement('span')
         articleDate.innerText = getFullDate(element.date)
 
