@@ -1,8 +1,14 @@
 @import url(./category-header/header.css);
 @import url(./category-footer/footer.css);
+@import url(./main/main.css);
 @import url(./css-variables.css);
 
-
-a {
-    cursor: pointer;
+ul li {
+    list-style: none;
 }
+a {
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+
+
