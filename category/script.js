@@ -10,7 +10,9 @@ function toggleBurger() {
     })
 }
 
-
+async function getCategoryArticles() {
+    
+}
 
 
 window.onload = function () {
