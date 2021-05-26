@@ -1,0 +1,11 @@
+:root{
+    --primary-color: #2680EB;
+    --secondary-color: #EBEBEB;
+    --grass-color: rgb(113, 230, 97);
+    --font-size-card-titles: 15px;
+    --font-size-card-p: 14px;
+    --size-card-span: 11px;
+}
+.width100{
+    width: 100%;
+}

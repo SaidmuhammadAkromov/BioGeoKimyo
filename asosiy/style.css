@@ -1,0 +1,18 @@
+@import url(./header/header.css);
+@import url(./css-variables.css);
+@import url(./footer/footer.css);
+@import url(./main/main.css);
+
+* {
+    list-style: none;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a {
+    cursor: pointer;
+}
+
+.active-class {
+    color: var(--primary-color);
+}

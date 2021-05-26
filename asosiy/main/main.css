@@ -1,0 +1,186 @@
+.main{
+    margin-top: 90px;
+}
+
+.categories{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.category{
+    width: 33.3%;
+}
+.category-header{
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(72.25deg, #FFFFFF 0%, #EDEDED 100%);
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+.card {
+    display: inline-block;
+    width: 100%;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.161);
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.card-image-block{
+    width: 100%;
+    height: 250px;
+    background-color: silver;
+    position: relative;
+}
+.card-category-button{
+    position: absolute;
+    right: 30px;
+    bottom: 30px;
+    display: flex;
+    background-color: white;
+    width: 97px;
+    height: 33px;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+.card-category-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+.card-content h4{
+    margin-top: 20px;
+    margin-bottom: 7px;
+    font-size: var(--font-size-card-titles);
+}
+.card-content {
+    margin: 0 30px;
+}
+.card-content p {
+    margin-bottom: 15px;
+    font-size: var(--font-size-card-p);
+}
+.card-content span {
+    font-size: var(--size-card-span);
+    margin: 10px 0;
+}
+.card-content div img{
+    width: 100%;
+}
+.card-content h4{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.lang {
+    cursor: pointer;
+}
+.card-content div {
+    width: 100%;
+    height: 250px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.more-articles {
+    width: 100%;
+    background-color: var(--secondary-color);
+    margin-top: 30px;
+    border-top: 3px var(--primary-color) solid;
+}
+.more-articles-container {
+    margin: 0 20px;
+    padding: 10px;
+}
+.more-articles h4 {
+    margin-top: 20px;
+    margin-bottom: 30px;
+}
+article {
+    margin: 30px 0;
+    position: relative;
+    padding-bottom: 30px;
+}
+article span {
+    font-size: var(--size-card-span);
+    position: absolute;
+    bottom: 0px;
+}
+#geografiya-block {
+    margin: 0 30px;
+}
+@media (max-width: 541px) {
+    .categories {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    }
+    .category {
+        width: 80%;
+        margin-bottom: 60px 0;
+        padding: 24px 0;
+    }
+    .card-image-block,
+    .category-header {
+        height: 400px;
+    }
+
+    :root{
+        --font-size-titles: 25px;
+        --font-size-p :15px;
+        --size-span:15px;
+    }
+}
+@media (max-width: 950px) {
+    .category-header, .card-image-block {
+        height: 150px;
+    }
+    #geografiya-block {
+        margin: 0 20px;
+    }
+    .card-content {
+        margin: 0 20px;
+    }
+    .more-articles-container {
+        margin: 0 10px;
+    }
+    .card-category-button {
+        right: 10px;
+        bottom: 10px;
+        width: 60px;
+        font-size: 10px;
+        height: 25px;
+    }
+    
+}
+@media (max-width: 780px) {
+    .card-content {
+        margin: 0 10px;
+    }
+    .more-articles-container {
+        margin: 0;
+    }
+    #geografiya-block {
+        margin: 0 10px;
+    }
+    #biologiya-block .category-header img {
+        height: 25px;
+        width: 8rem;
+    }
+    #geografiya-block .category-header img {
+        height: 25px;
+        width: 8rem;
+    }
+    #kimyo-block .category-header img {
+        height: 25px;
+        width: 5rem;
+    }
+    :root{
+        --font-size-p: 12px;
+    }
+}

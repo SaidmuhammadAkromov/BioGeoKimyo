@@ -1,0 +1,8 @@
+@import url(./category-header/header.css);
+@import url(./category-footer/footer.css);
+@import url(./css-variables.css);
+
+
+a {
+    cursor: pointer;
+}
