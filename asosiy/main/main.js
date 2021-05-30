@@ -10,6 +10,7 @@ function getFullDate(date) {
 
 function createCard(block, importElement) {
     const card = document.createElement('a')
+    card.href = '../article/index.html?id=' + importElement.id
     card.classList.add('card')
     let cardId;
     cardId = importElement.id
@@ -79,7 +80,8 @@ function createMoreArticles(block, importElements) {
 
         const articleTittle = document.createElement('a')
         articleTittle.innerText = element.title
-        articleTittle.href = '../article/index.html?id=' + element.id 
+        articleTittle.href = '../article/index.html?id=' + element.id
+
         const articleDate = document.createElement('span')
         articleDate.innerText = getFullDate(element.date)
 
@@ -141,7 +143,7 @@ window.addEventListener('load', async function () {
     getArticles(biologiyaBlock, 1, 1, 1)
     getArticles(geografiyaBlock, 1, 2, 1)
     await getArticles(kimyoaBlock, 1, 3, 1)
-    getMoreArticles(biologiyaBlock, 1, 1, 3, 3)
-    getMoreArticles(geografiyaBlock, 1, 2, 3, 3)
-    getMoreArticles(kimyoaBlock, 1, 3, 3, 3)
+    getMoreArticles(biologiyaBlock, 1, 1, 3, 1)
+    getMoreArticles(geografiyaBlock, 1, 2, 3, 1)
+    getMoreArticles(kimyoaBlock, 1, 3, 3, 1)
 })
