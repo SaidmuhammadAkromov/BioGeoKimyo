@@ -1,7 +1,9 @@
 @import url(./article-header/header.css);
 @import url(./article-footer/footer.css);
 @import url(./css-variables.css);
-@import url(./article-main/main.css);
+
+@import url(./article-main/article-main.css);
+
 
 a {
     text-decoration: none;

@@ -34,8 +34,10 @@ async function getArticle() {
                 const response = await fetch(url)
                 const moreArticles = await response.json()
                 const articles = document.querySelectorAll('article')
+
                 document.querySelector('.all-button').href = '../category/index.html?journalId=' + importElement.journalId
                 document.querySelector('#h1').innerText = importElement['category']['name']
+                console.log(moreArticles);
 
                 for (let index = 0; index < articles.length; index++) {
                     const article = articles[index];
@@ -69,7 +71,9 @@ function editMainArticle(importElement) {
     const authorInfo = document.querySelector('.author')
     authorInfo.children[0].src = IMAGE_URL + importElement.author.image
     authorInfo.children[1].innerText = importElement.author.name
+
     authorInfo.children[1].href = '../author/index.html?authorId=' + importElement.author.id
+
 }
 
 function getFullDate(date) {
