@@ -44,7 +44,7 @@ body {
 .tags li {
     margin-left: 10px;
 }
-.author {
+.author{
     display: flex;
     align-items: center;
 }

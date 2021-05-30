@@ -69,6 +69,7 @@ function editMainArticle(importElement) {
     const authorInfo = document.querySelector('.author')
     authorInfo.children[0].src = IMAGE_URL + importElement.author.image
     authorInfo.children[1].innerText = importElement.author.name
+    authorInfo.children[1].href = '../author/index.html?authorId=' + importElement.author.id
 }
 
 function getFullDate(date) {
