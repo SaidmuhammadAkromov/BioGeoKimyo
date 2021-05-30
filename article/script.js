@@ -20,13 +20,12 @@ async function getArticle() {
         const url = BASE_URL + '/article?langId=1' + '&id=' + id
         const response = await fetch(url)
         const importElement = await response.json()
-        console.log(importElement);
         editMainArticle(importElement)
         toggleBurger()
         getMorArticles()
         for (let index = 0; index < importElement['tags'].length; index++) {  //<<<<<<<<<<<<<<<<<TAG SIZE
             const tag = importElement['tags'][index];
-            createTags(tag.name)
+            createTags(tag.name, tag.id)
         }
         async function getMorArticles() {
             try {
@@ -90,10 +89,11 @@ function editMoreArticles(importElements) {
     
 }
 
-function createTags(tag) {
+function createTags(tag, id) {
     const tags = document.querySelector('.tags')
     const li = document.createElement('li')
     const a = document.createElement('a')
+    a.href = "../hashtag/index.html?tagId=" + id
     a.innerText = '#' + tag
     tags.append(li)
     li.append(a)

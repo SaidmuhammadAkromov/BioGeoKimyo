@@ -32,6 +32,9 @@ body {
     width: 100%;
     height: 100%;
 }
+p img {
+    width: 100%;
+}
 .main-article-footer {
     margin-top: 20px;
     display: flex;

@@ -1,0 +1,12 @@
+@import url(./hashtag-footer/footer.css);
+@import url(./hashtag-header/header.css);
+@import url(./hashtag-main/main.css);
+@import url(./css-variables.css);
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+li {
+    list-style: none;
+}
