@@ -93,6 +93,7 @@ async function getArticles() {
         
         for (let index = 0; index < 6; index++) {
             const elementForCard = importElementsForCards[index];
+            console.log(elementForCard['category'].id);
             createCard(cardsContainer, elementForCard)
         }
     }
@@ -102,6 +103,10 @@ async function getArticles() {
         const importElements = await response.json()
         const articles = document.querySelectorAll('article')
         console.log(importElements);
+        for (let index = 0; index < importElements.length; index++) {
+            const element = importElements[index];
+            console.log(element['category'].id);
+        }
         editMainArticle(importElements[0])
         getArticlesForCards(offset)
         if (pageId == 1) {
