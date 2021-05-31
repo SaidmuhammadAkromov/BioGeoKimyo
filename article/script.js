@@ -20,10 +20,11 @@ async function getArticle() {
         const url = BASE_URL + '/article?langId=1' + '&id=' + id
         const response = await fetch(url)
         const importElement = await response.json()
+        console.log(importElement);
         editMainArticle(importElement)
         toggleBurger()
         getMorArticles()
-        for (let index = 0; index < importElement['tags'].length; index++) {  //<<<<<<<<<<<<<<<<<TAG SIZE
+        for (let index = 0; index < 3; index++) {  //<<<<<<<<<<<<<<<<<TAG SIZE
             const tag = importElement['tags'][index];
             createTags(tag.name, tag.id)
         }
@@ -77,7 +78,8 @@ function editMainArticle(importElement) {
 
 function getFullDate(date) {
     const d = new Date(date)
-    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+    let dateStr = ("00" + d.getDate()).slice(-2) + "." + ("00" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear()
+    return dateStr;
 }
 
 function editMoreArticles(importElements) {

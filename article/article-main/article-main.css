@@ -112,6 +112,20 @@ p img {
         width: 100%;
         height: 70%;
     }
+    .main-article-footer {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .tags {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        white-space: pre-wrap ;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    }
 }
 @media (max-width: 580px) {
     .articles {

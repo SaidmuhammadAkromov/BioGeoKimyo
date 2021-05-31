@@ -128,7 +128,7 @@ a {
     text-overflow: ellipsis;
 }
 .card-body {
-    height: 90px;
+    height: 50px;
 }
 
 .card-body p {

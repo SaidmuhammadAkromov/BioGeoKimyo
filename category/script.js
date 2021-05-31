@@ -66,7 +66,8 @@ function editMainArticle(importElement) {
 }
 function getFullDate(date) {
     const d = new Date(date)
-    return d.getDate() + "/" + d.getMonth() + "/" + d.getFullYear();
+    let dateStr = ("00" + d.getDate()).slice(-2) + "." + ("00" + (d.getMonth() + 1)).slice(-2) + "." + d.getFullYear()
+    return dateStr;
 }
 async function getArticles() {
     const pageUrl = new URL(window.location.href)
