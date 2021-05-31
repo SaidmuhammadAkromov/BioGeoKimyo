@@ -78,6 +78,9 @@ body {
 .articles-block article p{
     margin: 20px 0px;
 }
+p img {
+    width: 100%;
+}
 .all-button {
     width: 126px;
     height: 41px;

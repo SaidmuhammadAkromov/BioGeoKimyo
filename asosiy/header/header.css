@@ -28,8 +28,8 @@ html,body{
 .logo-name{
     z-index: 5;
 }
-.bio{
-    color: var(--grass-color);
+.logo-name a h1 {
+    color: black;
 }
 .header-menu{
     display: flex;

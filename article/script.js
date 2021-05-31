@@ -93,7 +93,7 @@ function createTags(tag, id) {
     const tags = document.querySelector('.tags')
     const li = document.createElement('li')
     const a = document.createElement('a')
-    a.href = "../hashtag/index.html?tagId=" + id
+    a.href = `../hashtag/index.html?tagId=${id}&tagName=${tag}` 
     a.innerText = '#' + tag
     tags.append(li)
     li.append(a)

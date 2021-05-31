@@ -79,9 +79,13 @@ async function getArticles() {
         const url = BASE_URL + '/articles?langId=1' + '&journalId=' + pageId + '&offset=' + offset +1
         const response = await fetch(url)
         const importElementsForCards = await response.json()
+        const categoryButtons = document.getElementsByClassName('card-category-button')
 
         for (let index = 0; index < 6; index++) {
             const elementForCard = importElementsForCards[index];
+            const categoryButton = categoryButtons[index]
+            console.log(categoryButton);
+            categoryButton.innerText = elementForCard['category'].name
             createCard(cardsContainer, elementForCard)
         }
     })

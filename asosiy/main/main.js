@@ -57,7 +57,7 @@ function createCard(block, importElement) {
 
     const cardDate = document.createElement('span')
     cardDate.innerText = getFullDate(importElement.date)
-    card.append(cardDate)
+    cardBody.append(cardDate)
 }
 
 function createMoreArticles(block, importElements) {
@@ -96,6 +96,7 @@ async function getArticles(block,langId, journalId , size=10, offset=0) {
     try {
         const response = await fetch(url)
         const importElements = await response.json()
+        const categoryButtons = document.getElementsByClassName('card-category-button') 
         console.log(importElements);
         for (let index = 0; index < importElements.length; index++) {
             const element = importElements[index];
