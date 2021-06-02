@@ -1,6 +1,6 @@
 const IMAGE_URL = "http://192.144.37.95/images/"
 const BASE_URL = 'http://192.144.37.95:8080/api'
-let offset = 0
+let offset = 10
 function createCard(block, importElement) {
     const card = document.createElement('a')
     card.href = '../article/index.html?id=' + importElement.id
@@ -60,9 +60,11 @@ function toggleBurger() {
 }
 function editMainArticle(importElement) {
     const mainArticle = document.getElementById('mainArticle')
-    mainArticle.children[0].src = IMAGE_URL + importElement.image
-    mainArticle.children[1].children[0].children[1].innerText = importElement.title
-    mainArticle.children[1].children[0].children[2].innerHTML = importElement.body
+    const container = document.getElementById('container')
+    mainArticle.children[0].href = "../article/index.html?id=" + importElement.id
+    mainArticle.children[0].children[0].src = IMAGE_URL + importElement.image
+    container.children[2].innerText = importElement.title
+    container.children[3].innerHTML = importElement.body
 }
 function getFullDate(date) {
     const d = new Date(date)
@@ -73,22 +75,22 @@ async function getArticles() {
     const pageUrl = new URL(window.location.href)
     const pageId  = pageUrl.searchParams.get('journalId')
     const downloadMoreCards = document.getElementById('downloadMoreCards')
-
     downloadMoreCards.addEventListener('click', async function () {
-        let offset =+ 6
         const cardsContainer = document.getElementById('cardsContainer')
-        const url = BASE_URL + '/articles?langId=1' + '&journalId=' + pageId + '&offset=' + offset +1
+        const url = BASE_URL + '/articles?langId=1' + '&journalId=' + pageId + '&offset=' + offset + '&size=6'
         const response = await fetch(url)
         const importElementsForCards = await response.json()
         const categoryButtons = document.getElementsByClassName('card-category-button')
 
-        for (let index = 0; index < 6; index++) {
+        for (let index = 0; index < importElementsForCards.length; index++) {
             const elementForCard = importElementsForCards[index];
             const categoryButton = categoryButtons[index]
             console.log(categoryButton);
             categoryButton.innerText = elementForCard['category'].name
             createCard(cardsContainer, elementForCard)
         }
+
+        offset = offset + 6
     })
     async function getArticlesForCards() {
         const cardsContainer = document.getElementById('cardsContainer')
@@ -113,7 +115,7 @@ async function getArticles() {
             console.log(element['category'].id);
         }
         editMainArticle(importElements[0])
-        getArticlesForCards(offset)
+        getArticlesForCards()
         if (pageId == 1) {
             document.getElementById('h1').innerText = 'Biologiya'
             document.getElementById('categoryBtn').innerText = 'Biologiya'

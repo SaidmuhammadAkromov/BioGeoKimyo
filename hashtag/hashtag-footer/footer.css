@@ -1,8 +1,7 @@
 footer {
     background-color: var(--secondary-color);
-    position: relative;
-    display: inline-block;
-    bottom: -10%;
+    position: absolute;
+    bottom: 0;
     width: 100%;
     left: 0;
     display: inline-block;
@@ -37,6 +36,10 @@ footer {
     body, html {
         height: 100%;
         width: 100%;
+    }
+    footer {
+        position: absolute;
+        bottom: -70%;
     }
     .footer-body {
         flex-direction: column;

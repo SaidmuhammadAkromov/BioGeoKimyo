@@ -48,7 +48,7 @@ a {
     margin-right: 30px;
     position: relative;
 }
-.main-article img {
+.main-article a img {
     width: 100%;
     height: 100%;
 }
@@ -70,6 +70,7 @@ a {
     text-overflow: ellipsis;
 }
 .category-button {
+    display: block;
     width: 100px;
     height: 33px;
     background-color: white;
@@ -141,6 +142,9 @@ a {
     height: 250px;
     background-color: silver;
     position: relative;
+}
+.card-image-block img {
+    object-fit: cover;
 }
 .card-category-button{
     position: absolute;

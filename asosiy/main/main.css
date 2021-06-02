@@ -1,6 +1,9 @@
 .main{
     margin-top: 90px;
 }
+a {
+    color: black;
+}
 .categories{
     display: flex;
     width: 100%;
@@ -106,6 +109,9 @@ article {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+article a {
+    font-size: 14px;
 }
 article span {
     font-size: var(--size-card-span);
