@@ -1,7 +1,13 @@
+body {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+}
+
 footer {
     background-color: var(--secondary-color);
     position: absolute;
-    bottom: 0;
+    bottom: 0px;
     width: 100%;
     left: 0;
     display: inline-block;

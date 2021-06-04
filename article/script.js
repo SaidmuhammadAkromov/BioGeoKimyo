@@ -1,16 +1,6 @@
-function toggleBurger() {
-    document.querySelector('.header-burger').addEventListener('click', function() {
-        console.log('hello');
-        document.querySelector('.header-burger').classList.toggle('active')
-        document.querySelector('.header-menu').classList.toggle('active')
-        document.querySelector('.settings').classList.toggle('active')
-        document.querySelector('#uzLang').innerText = 'Uzbek'
-        document.querySelector('#ruLang').innerText = 'Russian'
-        document.querySelector('#engLang').innerText = 'English'
-    })
-}
-const IMAGE_URL = "http://192.144.37.95/images/"
-const BASE_URL = 'http://192.144.37.95:8080/api'
+import {BASE_URL} from '../asosiy/modules/contstants.js';
+import {IMAGE_URL} from '../asosiy/modules/contstants.js';
+import {toggleBurger} from '../asosiy/modules/create_card.js';
 
 async function getArticle() {
     const pageUrl = new URL(window.location.href)
