@@ -1,5 +1,5 @@
-@import url(./author-footer/footer.css);
-@import url(./author-header/header.css);
+@import url(../header/header.css);
+@import url(../footer/footer.css);
 @import url(./author-main/main.css);
 @import url(./css-variables.css);
 

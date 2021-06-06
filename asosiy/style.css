@@ -1,6 +1,6 @@
-@import url(./header/header.css);
 @import url(./css-variables.css);
-@import url(./footer/footer.css);
+@import url(../header/header.css);
+@import url(../footer/footer.css);
 @import url(./main/main.css);
 
 * {

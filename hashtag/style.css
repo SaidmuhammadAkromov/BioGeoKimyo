@@ -1,5 +1,5 @@
-@import url(./hashtag-footer/footer.css);
-@import url(./hashtag-header/header.css);
+@import url(../header/header.css);
+@import url(../footer/footer.css);
 @import url(./hashtag-main/main.css);
 @import url(./css-variables.css);
 

@@ -1,5 +1,5 @@
-@import url(./category-header/header.css);
-@import url(./category-footer/footer.css);
+@import url(../header/header.css);
+@import url(../footer/footer.css);
 @import url(./main/main.css);
 @import url(./css-variables.css);
 
@@ -11,4 +11,4 @@ a {
     color: black;
     cursor: pointer;
 
-
+}

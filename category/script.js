@@ -1,18 +1,52 @@
-import {BASE_URL} from '../asosiy/modules/contstants.js';
-import {IMAGE_URL} from '../asosiy/modules/contstants.js';
-import {createCard} from '../asosiy/modules/create_card.js';
-import {toggleBurger} from '../asosiy/modules/create_card.js';
-import {getFullDate} from '../asosiy/modules/create_card.js';
+import { BASE_URL } from '../asosiy/modules/contstants.js'
+import { IMAGE_URL } from '../asosiy/modules/contstants.js'
+import { createCard } from '../asosiy/modules/create_card.js'
+import { toggleBurger } from '../asosiy/modules/create_card.js'
+import { getFullDate } from '../asosiy/modules/create_card.js'
 
 let offset = 10
 
-function editMainArticle(importElement) {
-    const mainArticle = document.getElementById('mainArticle')
-    const container = document.getElementById('container')
-    mainArticle.children[0].href = "../article/index.html?id=" + importElement.id
-    mainArticle.children[0].children[0].src = IMAGE_URL + importElement.image
-    container.children[2].innerText = importElement.title
-    container.children[3].innerHTML = importElement.body
+function createMainCard(importElement) {
+    const articlesBlock = document.querySelector('.articles')
+    console.log(articlesBlock);
+
+    const mainArticle = document.createElement('div')
+    mainArticle.id = 'mainArticle'
+    mainArticle.classList.add('main-article')
+    articlesBlock.append(mainArticle)
+
+    const mainArticleHrefContainer = document.createElement('a')
+    mainArticleHrefContainer.href = `../article/index.html?id=${importElement.id}`
+    mainArticle.append(mainArticleHrefContainer)
+
+    const mainArticleImage = document.createElement('img')
+    mainArticleImage.src = `${IMAGE_URL}${importElement.image}`
+    mainArticleHrefContainer.append(mainArticleImage)
+
+    const mainArticleBody = document.createElement('div')
+    mainArticleBody.id = 'mainArticleBody'
+    mainArticleBody.classList.add('main-article-body')
+    mainArticleHrefContainer.append(mainArticleBody)
+
+    const container = document.createElement('div')
+    container.classList.add('container')
+    mainArticleBody.append(container)
+
+    const categoryButton = document.createElement('a')
+    categoryButton.classList.add('category-button')
+    categoryButton.innerText = importElement.category.name
+    container.append(categoryButton)
+
+    const mainArticleTitle = document.createElement('h2')
+    mainArticleTitle.classList.add('main-article-title')
+    mainArticleTitle.innerText = importElement.title
+    container.append(mainArticleTitle)
+
+    const mainArticleText = document.createElement('p')
+    mainArticleText.classList.add('main-article-text')
+    mainArticleText.innerHTML = importElement.body
+    container.append(mainArticleText)
+
 }
 async function getArticles() {
     const pageUrl = new URL(window.location.href)
@@ -28,7 +62,6 @@ async function getArticles() {
         for (let index = 0; index < importElementsForCards.length; index++) {
             const elementForCard = importElementsForCards[index];
             const categoryButton = categoryButtons[index]
-            console.log(categoryButton);
             categoryButton.innerText = elementForCard['category'].name
             createCard(cardsContainer, elementForCard)
         }
@@ -43,7 +76,6 @@ async function getArticles() {
         
         for (let index = 0; index < 6; index++) {
             const elementForCard = importElementsForCards[index];
-            console.log(elementForCard['category'].id);
             createCard(cardsContainer, elementForCard)
         }
     }
@@ -55,9 +87,9 @@ async function getArticles() {
         console.log(importElements);
         for (let index = 0; index < importElements.length; index++) {
             const element = importElements[index];
-            console.log(element['category'].id);
         }
-        editMainArticle(importElements[0])
+        // editMainArticle(importElements[0])
+        createMainCard(importElements[0])
         getArticlesForCards()
         if (pageId == 1) {
             document.getElementById('h1').innerText = 'Biologiya'
