@@ -54,27 +54,30 @@ function createMainCard(importElement) {
     container.append(mainArticleText)
 
 }
-function validationPage(PAGEID) {
-    if (PAGEID == 1) {
+function validationPage(pageID) {
+    if (pageID == 1) {
         document.getElementById('h1').innerText = 'Biologiya'
         document.getElementById('categoryBtn').innerText = 'Biologiya'
-    }else if (PAGEID == 2) {
+    }else if (pageID == 2) {
         document.getElementById('h1').innerText = 'Geografiya'
         document.getElementById('categoryBtn').innerText = 'Geografiya'
     }
-    else if (PAGEID == 3) {
+    else if (pageID == 3) {
         document.getElementById('h1').innerText = 'Kimyo'
         document.getElementById('categoryBtn').innerText = 'Kimyo'
     }
+
 }
-async function getArticlesForCards(PAGEID) {
+
+async function getArticlesForCards(pageID) {
     const cardsContainer = document.getElementById('cardsContainer')
-    const url = BASE_URL + `/articles?langId=1&journalId=${PAGEID}&offset=4&size=6`
+    const url = BASE_URL + `/articles?langId=1&journalId=${pageID}&offset=4&size=6`
     const response = await fetch(url)
     const importElementsForCards = await response.json()
     
     createCards(importElementsForCards, cardsContainer)
 }
+
 async function getArticles() {
     try {
         const url = BASE_URL + `/articles?langId=1&journalId=${PAGEID}&size=4&offset=0 `
@@ -91,7 +94,6 @@ async function getArticles() {
         console.log(error);
     }
 }
-
 
 window.onload = function () {
     const downloadMoreCards = document.getElementById('downloadMoreCards')
