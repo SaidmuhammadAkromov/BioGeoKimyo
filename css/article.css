@@ -1,0 +1,13 @@
+@import url(../modules/header/header.css);
+@import url(../modules/footer/footer.css);
+@import url(../modules/css-variables.css);
+@import url(../css/main-blocks/article-main.css);
+
+
+a {
+    text-decoration: none;
+    cursor: pointer;
+}
+ul li {
+    list-style: none;
+}

@@ -8,6 +8,9 @@ body {
     height: 100%;
     position: relative;
 }
+img {
+    object-fit: cover;
+}
 .main-header {
     margin-bottom: 30px;
 }

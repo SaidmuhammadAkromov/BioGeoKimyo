@@ -1,13 +1,20 @@
 const IMAGE_URL = "http://192.144.37.95/images/"
 const BASE_URL = 'http://192.144.37.95:8080/api'
 
+function createCards(importElements, block) {
+    for (let index = 0; index < importElements.length; index++) {
+        const importElement = importElements[index];
+        createCard(block, importElement);
+    }
+}
+
 function createCard(block, importElement) {
     const card = document.createElement('a')
     card.href = '../article/index.html?id=' + importElement.id
     card.classList.add('card')
     let cardId;
     cardId = importElement.id
-    card.href = '../article/index.html?id=' + cardId 
+    card.href = '../htmls/article.html?id=' + cardId 
     
     block.append(card)
 
@@ -25,7 +32,9 @@ function createCard(block, importElement) {
 
     const cardCategoryButton = document.createElement('a')
     cardCategoryButton.classList.add('card-category-button')
-    cardCategoryButton.innerText = "Category"
+    cardCategoryButton.innerText = importElement.category.name
+    cardCategoryButton.style.textTransform = 'capitalize'
+    cardCategoryButton.style.alignItems = 'center'
     cardImgBlock.append(cardCategoryButton)
 
 
@@ -55,27 +64,32 @@ function createMoreArticles(block, importElements) {
     block.append(moreArticlesBlock)
     
     const moreArticlesBlockContainer = document.createElement('div')
-    moreArticlesBlockContainer.classList.add('more-articles-container')
+    moreArticlesBlockContainer.classList.add('container')
     moreArticlesBlock.append(moreArticlesBlockContainer)
 
     const moreArticlesTitle = document.createElement('h4')
     moreArticlesTitle.innerText = 'Boshqa malumotlar'
     moreArticlesBlockContainer.append(moreArticlesTitle)
 
-    for (let index = 0; index < 3; index++) {
+    for (let index = 0; index < importElements.length; index++) {
         const element = importElements[index];
         const article = document.createElement('article')
         moreArticlesBlockContainer.append(article)
 
         const articleTittle = document.createElement('a')
         articleTittle.innerText = element.title
-        articleTittle.href = '../article/index.html?id=' + element.id
+        articleTittle.href = '../htmls/article.html?id=' + element.id
+        article.append(articleTittle)
 
         const articleDate = document.createElement('span')
         articleDate.innerText = getFullDate(element.date)
-
         article.append(articleDate)
-        article.append(articleTittle)
+        
+        if (index <= importElements.length -2) {
+            const hr = document.createElement('hr')
+            moreArticlesBlockContainer.append(hr)
+        }
+
     }
 }
 
@@ -96,4 +110,4 @@ function toggleBurger() {
         document.querySelector('#engLang').innerText = 'English'
     })
 }
-export {createCard, getFullDate, createMoreArticles, toggleBurger};
+export {createCard, getFullDate, createMoreArticles, toggleBurger, createCards};

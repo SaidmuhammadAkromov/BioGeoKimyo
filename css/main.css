@@ -1,7 +1,7 @@
-@import url(./css-variables.css);
-@import url(../header/header.css);
-@import url(../footer/footer.css);
-@import url(./main/main.css);
+@import url(../modules/css-variables.css);
+@import url(../modules/header/header.css);
+@import url(../modules/footer/footer.css);
+@import url(../css/main-blocks/asosiy-main.css);
 
 * {
     list-style: none;

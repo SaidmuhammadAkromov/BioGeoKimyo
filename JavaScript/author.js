@@ -1,7 +1,7 @@
-import {BASE_URL} from '../asosiy/modules/contstants.js';
-import {IMAGE_URL} from '../asosiy/modules/contstants.js';
-import {createCard} from '../asosiy/modules/create_card.js';
-import {toggleBurger} from '../asosiy/modules/create_card.js';
+import { BASE_URL } from '../modules/contstants.js';
+import { IMAGE_URL } from '../modules/contstants.js';
+import { toggleBurger } from '../modules/create_card.js';
+import { createCards } from '../modules/create_card.js';
 
 
 function editAuthor(author) {
@@ -19,17 +19,14 @@ async function getArticles() {
         const url = BASE_URL + '/articles?langId=1' + '&journalId=1' + '&authorId=' + authorID
         const response = await fetch(url)
         const importElements = await response.json()
-        console.log(response);
+
         editAuthor(importElements[0].author)
-        for (let index = 0; index < importElements.length; index++) {
-            const importElement = importElements[index];
-        createCard(cardsContainer, importElement);
-        }
+        createCards(importElements)
+
     } catch (error) {
         console.log(error);
     }
 }
-
 
 window.onload = function () {
     toggleBurger()
