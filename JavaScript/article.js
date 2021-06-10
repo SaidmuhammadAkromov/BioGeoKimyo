@@ -1,53 +1,17 @@
-import { BASE_URL } from '../modules/contstants.js'
-import { IMAGE_URL } from '../modules/contstants.js'
-import { toggleBurger} from '../modules/create_card.js'
-import { getFullDate } from '../modules/create_card.js'
+import { BASE_URL , IMAGE_URL} from '../modules/contstants.js'
+import { toggleBurger, getFullDate, getArticles, createMoreArticles, appentTo} from '../modules/create_card.js'
 
 
+const pageUrl = new URL(window.location.href)
+const mainCardId  = pageUrl.searchParams.get('id')
 
-async function getMorArticles(importElement) {
-    try {
-        const url = BASE_URL + '/articles?langId=1' + '&journalId=' + importElement.journalId + '&'
-        const response = await fetch(url)
-        const moreArticles = await response.json()
-        const articles = document.querySelectorAll('article')
-
-        document.querySelector('.all-button').href = '../htmls/journal.html?journalId=' + importElement.journalId
-        document.querySelector('#h1').innerText = importElement['category']['name']
-
-        for (let index = 0; index < articles.length; index++) {
-            editMoreArticles(moreArticles, articles)
-        }
-    
-    } catch (error) {
-        console.log(error);
-    }
-
-    
+async function getOneArticle(id) {
+    const url = `${BASE_URL}/article?langId=1&id=${id}`
+    const response = await fetch(url)
+    const importElement = await response.json()
+    console.log(importElement);
+    return importElement
 }
-
-async function getArticle() {
-    const pageUrl = new URL(window.location.href)
-    const id  = pageUrl.searchParams.get('id')
-    
-    try {
-        const url = BASE_URL + '/article?langId=1' + '&id=' + id
-        const response = await fetch(url)
-        const importElement = await response.json()
-        console.log(importElement);
-        editMainArticle(importElement)
-        toggleBurger()
-        getMorArticles(importElement)
-        for (let index = 0; index < 3; index++) {  //<<<<<<<<<<<<<<<<<TAG SIZE
-            const tag = importElement['tags'][index];
-            createTags(tag.name, tag.id)
-        }
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-
 
 function editMainArticle(importElement) {
     const articleBody = document.getElementById('articleBody')
@@ -60,31 +24,49 @@ function editMainArticle(importElement) {
     authorInfo.children[1].innerText = importElement.author.name
 
     authorInfo.children[1].href = '../htmls/author.html?authorId=' + importElement.author.id
-
 }
 
-function editMoreArticles(importElements, articles) {
-    for (let index = 0; index < articles.length; index++) {
-        const article = articles[index]
-        const element = importElements[index];
-        
-        article.children[0].innerText = element.title
-        article.children[0].href = '../htmls/article.html?id=' + element.id
-        article.children[1].innerText = getFullDate(element.date)
-    }
-    
+function createAllButton(element) {
+    const con = document.getElementById('con')
+    const allBtn = document.createElement('a')
+    allBtn.innerText = 'Barchasi'
+    allBtn.classList.add('all-button')
+    allBtn.href = `../htmls/journal.html?langId=${element.langId}&journalId=${element.journalId}`
+    con.append(allBtn)
 }
 
-function createTags(tag, id) {
+function createTags(tag) {
     const tags = document.querySelector('.tags')
     const li = document.createElement('li')
     const a = document.createElement('a')
-    a.href = `../htmls/hashtag.html?tagId=${id}&tagName=${tag}` 
-    a.innerText = '#' + tag
+    a.href = `../htmls/hashtag.html?tagId=${tag.id}&tagName=${tag.name}` 
+    a.innerText = '#' + tag.name
     tags.append(li)
     li.append(a)
 }
 
-window.onload = function () {
-    getArticle()
+window.onload = async function () {
+    const articlesBlock = document.querySelector('.articles')
+    const importMainArticle = await getOneArticle(mainCardId)
+
+    editMainArticle(importMainArticle)
+
+    for (let index = 0; index < importMainArticle.tags.length; index++) {
+        const tags = importMainArticle.tags[index];
+        const tag = createTags(tags)
+    }
+
+    let importMoreArticlesParams = {
+        langId: importMainArticle.langId,
+        journalId: importMainArticle.journalId,
+        size: 5,
+        offset: 1
+    }
+
+    const importMoreArticles = await getArticles(importMoreArticlesParams)
+    console.log(importMoreArticles);
+    const moreArticles = createMoreArticles(importMoreArticles)
+    appentTo(articlesBlock, moreArticles)
+    createAllButton(importMainArticle)
+    toggleBurger()
 }

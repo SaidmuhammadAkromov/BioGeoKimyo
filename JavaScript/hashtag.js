@@ -1,29 +1,27 @@
 import { BASE_URL } from '../modules/contstants.js';
-import { createCard } from '../modules/create_card.js';
-import { toggleBurger } from '../modules/create_card.js';
-import { createCards } from '../modules/create_card.js';
+import { toggleBurger, createCards , createCard, appentTo} from '../modules/create_card.js';
 
+const pageUrl = new URL(window.location.href)
+const tagID  = pageUrl.searchParams.get('tagId')
+const tagName  = pageUrl.searchParams.get('tagName')
 
-async function getArticles() {
-    const pageUrl = new URL(window.location.href)
-    const tagId  = pageUrl.searchParams.get('tagId')
-    const tagName = pageUrl.searchParams.get('tagName')
-    const cardsContainer = document.getElementById('cardsContainer')
-    try {
-        const url = BASE_URL + '/articles?langId=1' + '&tagId=' + tagId
-        const response = await fetch(url)
-        const importElementsForCards = await response.json()
-        document.querySelector('.tagName').innerText = `#${tagName}`
+async function getHashtag() {
+    const url = `${BASE_URL}/articles?langId=1&tagId=${tagID}`
+    const response = await fetch(url)
+    const importElement = await response.json()
 
-        createCards(importElementsForCards, cardsContainer)
-        
-    } catch (error) {
-        console.log(error);
-    }
+    return importElement
 }
 
+window.onload = async function () {
+    const cardsContainer = document.getElementById('cardsContainer')
+    let qweqwe = await getHashtag()
+    document.querySelector('.tagName').innerText = `#${tagName}`
+    for (let index = 0; index < qweqwe.length; index++) {
+        const element = qweqwe[index];
+        const card = createCard(element)
+        appentTo(cardsContainer, card)
+    }
 
-window.onload = function () {
     toggleBurger()
-    getArticles()
 }

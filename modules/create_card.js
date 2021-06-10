@@ -63,6 +63,7 @@ function createMoreArticles(importElements) {
     
     const moreArticlesBlockContainer = document.createElement('div')
     moreArticlesBlockContainer.classList.add('container')
+    moreArticlesBlockContainer.id = 'con'
     moreArticlesBlock.append(moreArticlesBlockContainer)
 
     const moreArticlesTitle = document.createElement('h4')
