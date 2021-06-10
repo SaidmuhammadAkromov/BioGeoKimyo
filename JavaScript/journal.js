@@ -1,25 +1,42 @@
 import { BASE_URL } from '../modules/contstants.js'
 import { IMAGE_URL } from '../modules/contstants.js'
-import { createCard } from '../modules/create_card.js'
-import { toggleBurger } from '../modules/create_card.js'
-import { getFullDate } from '../modules/create_card.js'
-import { createMoreArticles } from '../modules/create_card.js'
-import { createCards } from '../modules/create_card.js'
-
-
+import { createCard, createCards , createMoreArticles , getFullDate , toggleBurger , getArticles, appentTo} from '../modules/create_card.js'
 
 const pageUrl = new URL(window.location.href)
 const PAGEID  = pageUrl.searchParams.get('journalId')
-let offset = 10
+
+let importMoreaCardsParams = {
+    langId: 1,
+    journalId: PAGEID,
+    offset: 11,
+    size: 6
+}
+
+let importMainArticleParams = {
+    langId: 1,
+    journalId: PAGEID,
+    offset: 0,
+    size: 1
+}
+
+let importMoreArticlesParams = {
+    langId: 1,
+    journalId: PAGEID,
+    offset: 1,
+    size: 4
+}
+
+let importCardsParams = {
+    langId: 1,
+    journalId: PAGEID,
+    offset: 5,
+    size: 6
+}
 
 function createMainCard(importElement) {
-    const articlesBlock = document.querySelector('.articles')
-    console.log(articlesBlock);
-
     const mainArticle = document.createElement('div')
     mainArticle.id = 'mainArticle'
     mainArticle.classList.add('main-article')
-    articlesBlock.append(mainArticle)
 
     const mainArticleHrefContainer = document.createElement('a')
     mainArticleHrefContainer.href = `../htmls/article.html?id=${importElement.id}`
@@ -53,62 +70,57 @@ function createMainCard(importElement) {
     mainArticleText.innerHTML = importElement.body
     container.append(mainArticleText)
 
+    return mainArticle
 }
-function validationPage(pageID) {
-    if (pageID == 1) {
-        document.getElementById('h1').innerText = 'Biologiya'
-        document.getElementById('categoryBtn').innerText = 'Biologiya'
-    }else if (pageID == 2) {
-        document.getElementById('h1').innerText = 'Geografiya'
-        document.getElementById('categoryBtn').innerText = 'Geografiya'
+
+function validationPage() {
+    let page = document.getElementById('h1')
+        page.innerText = 'Biologiya'
+    if (PAGEID == 2) {
+        page.innerText = 'Geografiya'
     }
-    else if (pageID == 3) {
-        document.getElementById('h1').innerText = 'Kimyo'
-        document.getElementById('categoryBtn').innerText = 'Kimyo'
+    else if (PAGEID == 3) {
+        page.innerText = 'Kimyo'
     }
 
 }
 
-async function getArticlesForCards(pageID) {
-    const cardsContainer = document.getElementById('cardsContainer')
-    const url = BASE_URL + `/articles?langId=1&journalId=${pageID}&offset=4&size=6`
-    const response = await fetch(url)
-    const importElementsForCards = await response.json()
-    
-    createCards(importElementsForCards, cardsContainer)
-}
-
-async function getArticles() {
-    try {
-        const url = BASE_URL + `/articles?langId=1&journalId=${PAGEID}&size=4&offset=0 `
-        const response = await fetch(url)
-        const importElements = await response.json()
-        const articlesBlock = document.querySelector('.articles')
-
-        createMainCard(importElements[0])
-        createMoreArticles(articlesBlock, importElements)
-        getArticlesForCards(PAGEID)
-        validationPage(PAGEID)
-
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-window.onload = function () {
+window.onload = async function () {
+    const articlesBlock = document.querySelector('.articles')
     const downloadMoreCards = document.getElementById('downloadMoreCards')
+    const cardsContainer = document.getElementById('cardsContainer')
+
+    const importMainCard = await getArticles(importMainArticleParams)
+    for (let index = 0; index < 1; index++) {
+        const element = importMainCard[index];
+        const mainCard = createMainCard(element)
+        appentTo(articlesBlock, mainCard)
+    }
+
+    const importMoreArticles = await getArticles(importMoreArticlesParams)
+    const moreArticles = createMoreArticles(importMoreArticles)
+    appentTo(articlesBlock, moreArticles)
+
+
+    const importCards = await getArticles(importCardsParams)
+    for (let index = 0; index < importCards.length; index++) {
+        const element = importCards[index];
+        const card = createCard(element)
+        appentTo(cardsContainer, card)
+    }
 
     downloadMoreCards.addEventListener('click', async function () {
-        const url = BASE_URL + '/articles?langId=1' + '&journalId=' + PAGEID + '&offset=' + offset + '&size=6'
-        const response = await fetch(url)
-        const importElementsForCards = await response.json()
-        const cardsContainer = document.getElementById('cardsContainer')
-
-        createCards(importElementsForCards, cardsContainer)
-
-        offset = offset + 6
+        const importMoreCards = await getArticles(importMoreaCardsParams)
+        
+        for (let index = 0; index < importMoreCards.length; index++) {
+            const importElement = importMoreCards[index];
+            const card = createCard(importElement)
+            appentTo(cardsContainer, card)
+        }
+        importMoreaCardsParams.offset = importMoreaCardsParams.offset + 6
     })
 
+
+    validationPage()
     toggleBurger()
-    getArticles()
 }

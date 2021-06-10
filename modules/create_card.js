@@ -1,22 +1,20 @@
 const IMAGE_URL = "http://192.144.37.95/images/"
 const BASE_URL = 'http://192.144.37.95:8080/api'
 
-function createCards(importElements, block) {
+function createCards(importElements) {
     for (let index = 0; index < importElements.length; index++) {
         const importElement = importElements[index];
-        createCard(block, importElement);
+        createCard(importElement);
     }
 }
 
-function createCard(block, importElement) {
+function createCard(importElement) {
     const card = document.createElement('a')
     card.href = '../article/index.html?id=' + importElement.id
     card.classList.add('card')
     let cardId;
     cardId = importElement.id
     card.href = '../htmls/article.html?id=' + cardId 
-    
-    block.append(card)
 
     const cardImgBlock = document.createElement('div')
     cardImgBlock.classList.add('card-image-block')
@@ -57,11 +55,11 @@ function createCard(block, importElement) {
     const cardDate = document.createElement('span')
     cardDate.innerText = getFullDate(importElement.date)
     cardContent.append(cardDate)
+    return card
 }
-function createMoreArticles(block, importElements) {
+function createMoreArticles(importElements) {
     const moreArticlesBlock = document.createElement('div')
     moreArticlesBlock.classList.add('more-articles')
-    block.append(moreArticlesBlock)
     
     const moreArticlesBlockContainer = document.createElement('div')
     moreArticlesBlockContainer.classList.add('container')
@@ -91,6 +89,8 @@ function createMoreArticles(block, importElements) {
         }
 
     }
+
+    return moreArticlesBlock
 }
 
 function getFullDate(date) {
@@ -110,4 +110,17 @@ function toggleBurger() {
         document.querySelector('#engLang').innerText = 'English'
     })
 }
-export {createCard, getFullDate, createMoreArticles, toggleBurger, createCards};
+
+
+
+async function getArticles(params) {
+    const url = `${BASE_URL}/articles?langId=${params.langId}&journalId=${params.journalId}&size=${params.size}&offset=${params.offset}`
+    const response = await fetch(url)
+    const importElements = await response.json()
+    return importElements
+}
+
+function appentTo(block, target) {
+    block.append(target)
+}
+export {createCard, getFullDate, createMoreArticles, toggleBurger, createCards, getArticles, appentTo};

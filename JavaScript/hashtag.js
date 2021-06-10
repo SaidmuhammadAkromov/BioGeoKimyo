@@ -15,7 +15,7 @@ async function getArticles() {
         const importElementsForCards = await response.json()
         document.querySelector('.tagName').innerText = `#${tagName}`
 
-        createCards(importElementsForCards)
+        createCards(importElementsForCards, cardsContainer)
         
     } catch (error) {
         console.log(error);
